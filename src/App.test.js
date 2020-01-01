@@ -78,3 +78,35 @@ test("clicking decrement button decrements counter display", () => {
   const counterDisplay = findByTestAttr(wrapper, "counter-display");
   expect(counterDisplay.text()).toContain(counter - 1);
 });
+test("counter display can't go below zero", () => {
+  const counter = 0;
+  const wrapper = setup(null, { counter });
+  const button = findByTestAttr(wrapper, "decrement-button");
+  button.simulate("click");
+  const counterDisplay = findByTestAttr(wrapper, "counter-display");
+  expect(counterDisplay.text()).toContain(counter);
+});
+test("display an error message when trying to go below zero", () => {
+  const counter = 0;
+  const wrapper = setup(null, { counter });
+  const button = findByTestAttr(wrapper, "decrement-button");
+  button.simulate("click");
+  const errorMessage = findByTestAttr(wrapper, "error-message");
+  expect(errorMessage.text()).toMatch(/zero|0/i);
+});
+test("Error should clear on clicking increment button", () => {
+  const counter = 0;
+  const wrapper = setup(null, counter);
+
+  // click decrement button when counter is zero to show error message
+  const decButton = findByTestAttr(wrapper, "decrement-button");
+  decButton.simulate("click");
+
+  // click increment button after showing error message
+  const incButton = findByTestAttr(wrapper, "increment-button");
+  incButton.simulate("click");
+
+  // message should be cleared
+  const errorMessage = findByTestAttr(wrapper, "error-message");
+  expect(errorMessage.text()).toEqual("");
+});
