@@ -24,24 +24,24 @@ const setup = (props = {}, state = null) => {
  * @param {string} val - Value of the data-test attribute for search.
  * @returns {ShallowWrapper}
  */
-const findByAttr = (wrapper, val) => {
+const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 };
 
 test("renders without error", () => {
   // test passes if /index.js renders App without error
   const wrapper = setup();
-  const appComponent = findByAttr(wrapper, "component-app");
+  const appComponent = findByTestAttr(wrapper, "component-app");
   expect(appComponent.length).toBe(1);
 });
 test("renders increment button", () => {
   const wrapper = setup();
-  const button = findByAttr(wrapper, "increment-button");
+  const button = findByTestAttr(wrapper, "increment-button");
   expect(button.length).toBe(1);
 });
 test("renders counter display", () => {
   const wrapper = setup();
-  const counterDisplay = findByAttr(wrapper, "counter-display");
+  const counterDisplay = findByTestAttr(wrapper, "counter-display");
   expect(counterDisplay.length).toBe(1);
 });
 test("counter starts at 0", () => {
@@ -49,4 +49,15 @@ test("counter starts at 0", () => {
   const initialCounterState = wrapper.state("counter");
   expect(initialCounterState).toBe(0);
 });
-test("clicking button increments counter display", () => {});
+test("clicking button increments counter display", () => {
+  const counter = 7;
+  const wrapper = setup(null, { counter });
+
+  // find button and click
+  const button = findByTestAttr(wrapper, "increment-button");
+  button.simulate("click");
+
+  // find display and test value
+  const counterDisplay = findByTestAttr(wrapper, "counter-display");
+  expect(counterDisplay.text()).toContain(counter + 1); // this will not fail even if we change the display text
+});
