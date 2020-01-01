@@ -10,6 +10,11 @@ class App extends Component {
       counter: prevState.counter + 1
     }));
   };
+  decrement = () => {
+    this.setState(prevState => ({
+      counter: prevState.counter - 1
+    }));
+  };
 
   render() {
     return (
@@ -19,6 +24,9 @@ class App extends Component {
         </h1>
         <button data-test="increment-button" onClick={this.increment}>
           Increment
+        </button>
+        <button data-test="decrement-button" onClick={this.decrement}>
+          Decrement
         </button>
       </div>
     );
