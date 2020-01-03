@@ -1,11 +1,8 @@
 import React from "react";
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "enzyme";
 
 import { findByTestAttr, checkProps } from "../test/testUtils";
 import Congrats from "./Congrats";
-
-configure({ adapter: new Adapter() });
 
 // when updating defaultProps, you MUST check all your tests to update their props accordingly
 const defaultProps = { success: false };
