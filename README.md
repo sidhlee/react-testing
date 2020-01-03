@@ -1,8 +1,8 @@
 # React Testing with Jest and Enzyme
 
-1. Introduction to Jest, Enzyme and TDD
+### 1. Introduction to Jest, Enzyme and TDD
 
-2. Simple React App Click Counter
+### 2. Simple React App Click Counter
 
 - Set up a simple React app with Jest and Enzyme
 - Used Enzyme's `shallow()` function to render a component
@@ -14,7 +14,7 @@
 - Tested components for updates after interaction
 - Created re-usable `setup()` and `findByTestAttr()` functions
 
-3. Summary of Abstractions
+### 3. Summary of Abstractions
 
 - `findByTestAttr` in _test/testUtils.js_
 - `checkProps` in _test/testUtils.js_
