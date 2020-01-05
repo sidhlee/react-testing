@@ -13,7 +13,14 @@ const Congrats = props => {
       Congratulations! You guessed the word!
     </span>
   ) : null;
-  return <div data-test="component-congrats">{message}</div>;
+  return (
+    <div
+      data-test="component-congrats"
+      className="alert alert-success"
+    >
+      {message}
+    </div>
+  );
 };
 
 Congrats.propTypes = {
