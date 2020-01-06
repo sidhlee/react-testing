@@ -108,3 +108,39 @@
   - Granular tests make it easier to locate the problem
 
 > Unit test action creators and reducers when they become sufficiently complex (e.g. including long and complex logic)
+
+### Connected Component Setup
+
+1. Create a `storeFactory` utility
+
+- Creates a testing store with reducers from the actual app
+- Will eventually add middlewares
+
+2. Add store as prop to our connected component within the test
+3. Use `shallow` to create a virtual DOM of the connected component
+4. Use `.dive()` to get the child of the connected component (Input)
+
+#### Choice 1: Use actual store, not mock store
+
+- `redux-mock-store` can test intermediate actions
+  - Such as `loading` while fetching data
+- Mocked store cannot test changes to state. It only shows you the series of actions.
+- Actual store is closer to the real app
+- Mocks are always one step removed from the real app
+
+#### Choice 2: Test with connected component
+
+- You can export component before it's connected and test it
+- Redux docs recommends testing unconnected component
+- Enzyme strongly recommends testing connected component with `dive()`
+
+##### Connected component
+
+- closer to app
+- Can work with store and see how it is affected by actions
+
+##### Non-connected component
+
+- Further from app
+- Can pass mock action creators as props
+  - To check if action creator is called at the right point in time
