@@ -2,20 +2,8 @@ import React from "react";
 import { shallow } from "enzyme";
 
 // we don't need checkProp util function here because Input gets all its props from redux store
-import { findByTestAttr } from "../test/testUtils";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import Input from "./Input";
-
-/**
- * Factory function to create a ShallowWrapper for the Input component.
- * @function setup
- * @param {object} initialState - Initial state for this setup.
- * @returns {ShallowWrapper}
- */
-const setup = (initialState = {}) => {
-  const wrapper = shallow(<Input />);
-  // check what this connected component looks like
-  console.log(wrapper.debug()); // stringify what it's rendering
-};
 
 /* 
 We are testing Input which is wrapped in redux's connect() and exported.
@@ -25,6 +13,19 @@ For our tests, we need to create a fresh store that matches configuration for th
 
 Invariant Violation: Could not find "store" in the context of "Connect(Input)". Either wrap the root component in a <Provider>, or pass a custom React context provider to <Provider> and the corresponding React context consumer to Connect(Input) in connect options.
 */
+
+/**
+ * Factory function to create a ShallowWrapper for the Input component.
+ * @function setup
+ * @param {object} initialState - Initial state for this setup.
+ * @returns {ShallowWrapper}
+ */
+const setup = (initialState = {}) => {
+  const store = storeFactory(initialState);
+  const wrapper = shallow(<Input store={store} />);
+  // check what this connected component looks like
+  console.log(wrapper.debug()); // stringify what it's rendering
+};
 
 setup();
 
