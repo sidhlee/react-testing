@@ -134,13 +134,7 @@
 - Redux docs recommends testing unconnected component
 - Enzyme strongly recommends testing connected component with `dive()`
 
-##### Connected component
-
-- closer to app
-- Can work with store and see how it is affected by actions
-
-##### Non-connected component
-
-- Further from app
-- Can pass mock action creators as props
-  - To check if action creator is called at the right point in time
+| Connected Component                                       | Non-connected component                                                                    |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| closer to app                                             | further from app                                                                           |
+| can work with store and see how it is affected by actions | can pass mock action creators as props to check if it is called at the right point in time |
