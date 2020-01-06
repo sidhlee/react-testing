@@ -25,12 +25,24 @@ const setup = (initialState = {}) => {
   const wrapper = shallow(<Input store={store} />)
     .dive() // get past HOC
     .dive(); // get past wrapping div
+  return wrapper;
 };
 
 // we have two contexts
 describe("render", () => {
   describe("word has not been guessed", () => {
-    test("renders component without error", () => {});
+    let wrapper; // scope the wrapper to the describe
+    beforeEach(() => {
+      const initialState = {
+        success: false
+      };
+      wrapper = setup(initialState);
+    });
+
+    test("renders component without error", () => {
+      const component = findByTestAttr(wrapper, "component-input");
+      expect(component.length).toBe(1);
+    });
     test("renders the input control", () => {});
     test("renders a submit button", () => {});
   });
