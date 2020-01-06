@@ -1,8 +1,8 @@
 # React Testing with Jest and Enzyme
 
-### 1. Introduction to Jest, Enzyme and TDD
+## 1. Introduction to Jest, Enzyme and TDD
 
-### 2. Simple React App Click Counter
+## 2. Simple React App Click Counter
 
 - Set up a simple React app with Jest and Enzyme
 - Used Enzyme's `shallow()` function to render a component
@@ -14,7 +14,7 @@
 - Tested components for updates after interaction
 - Created re-usable `setup()` and `findByTestAttr()` functions
 
-### 3. Summary of Abstractions
+### Summary of Abstractions
 
 - `findByTestAttr` in _test/testUtils.js_
 - `checkProps` in _test/testUtils.js_
@@ -27,7 +27,7 @@
   - Less useful in diagnosing failing tests
   - Find a balance between less-lines-of-code and readability
 
-### 4. Zotto App
+## 3. Zotto App
 
 #### Components
 
@@ -84,3 +84,27 @@
 - Add to `guessedWords` and update `success`
 - Action creator discussed later in **Redux THunk**
 - This section: Look at `success` and how it affects input display
+
+### Notes: Unit testing on action creators and reducers
+
+#### Skip action creator / reducer unit testing?
+
+- Only do integration tests on API
+  - test points of user interaction and check if it properly updates store state.
+- Action creators/ reducers are implementation detail
+  - As long as the API doesn't change, you can make changes in action creators and reducers without testing them.
+
+#### Tradeoffs for skipping unit tests
+
+##### Pros
+
+- Fewer tests to maintain
+- Less test refactoring when refactoring code
+
+##### Cons
+
+- Hard to diagnose when tests fail
+  - Integration test generally covers large area of code and it can be hard to pinpoint the source of the problem
+  - Granular tests make it easier to locate the problem
+
+> Unit test action creators and reducers when they become sufficiently complex (e.g. including long and complex logic)
