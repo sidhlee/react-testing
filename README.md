@@ -77,3 +77,10 @@
   - Updates `success` piece of state
   - Initial value: `false`
   - Sets `success: true` upon `CORRECT_GUESS` action
+
+#### Input Redux Store Interactions
+
+- Consult `success` piece of state
+- Add to `guessedWords` and update `success`
+- Action creator discussed later in **Redux THunk**
+- This section: Look at `success` and how it affects input display
