@@ -22,12 +22,10 @@ Invariant Violation: Could not find "store" in the context of "Connect(Input)". 
  */
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
-  const wrapper = shallow(<Input store={store} />);
-  // check what this connected component looks like
-  console.log(wrapper.debug()); // stringify what it's rendering
+  const wrapper = shallow(<Input store={store} />)
+    .dive() // get past HOC
+    .dive(); // get past wrapping div
 };
-
-setup();
 
 // we have two contexts
 describe("render", () => {
