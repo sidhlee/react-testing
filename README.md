@@ -68,3 +68,12 @@
   - `Input`
   - `App`
 - Test action creator calls
+
+#### `success` State Planning
+
+- **Plan** -> test -> code
+- Action creator for `CORRECT_GUESS` action
+- Success reducer
+  - Updates `success` piece of state
+  - Initial value: `false`
+  - Sets `success: true` upon `CORRECT_GUESS` action
