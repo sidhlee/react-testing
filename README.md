@@ -26,3 +26,45 @@
 - **Caution**: too many abstractions => hard-to-read tests
   - Less useful in diagnosing failing tests
   - Find a balance between less-lines-of-code and readability
+
+### 4. Zotto App
+
+#### Components
+
+- App
+  - Title, contains children components
+- Input
+  - Input control and submit button
+- GuessedWords
+  - Table of guessed words and matching letter count
+- Congrats
+  - Congrats message
+
+#### Simple Redux
+
+- Work with `success` piece of state
+  - has the secret word been guessed?
+- Action creator creates `CORRECT_GUESS` action
+- Reducer updates `success`
+- `Input` conditionally renders
+  - If `success` is false
+- `Congrats` renders when `success` is true
+
+#### Redux Thunk
+
+- Action creators that fire off multiple actions
+- `guessWord`
+  - Add to `guessedWords`
+  - Conditionally update `success`
+
+#### Async action creators and Axios
+
+- Test action creator that fetches `secretWord` from a server
+- Using `moxios` to avoid connecting to server
+
+#### Redux Props in Connected Components
+
+- Test state and action creator props in
+  - `Input`
+  - `App`
+- Test action creator calls
