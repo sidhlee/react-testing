@@ -165,8 +165,10 @@
 
 - Function that takes a `guessedWord` string
 - Use helper function to calculate `letterMatchCount`
-- Create action `GUESS_WORD`
+- Always dispatch action `GUESS_WORD`
   - Payload contains `guessedWord` and `letterMatchCount`
+- If word is correct, also dispatch `CORRECT_GUESS`
+  - We can access `success` piece of state within `guessWord`
 - Reducer will update `guessedWords` state
 
 ### Complications
@@ -177,8 +179,9 @@
 
 ### Redux Thunk!
 
-- Dispatch multiple actions from one creator
-- Access state within action creator
+- Dispatch multiple actions from one action creator
+- Access current state within action creator
+- Returns a function that takes dispatch as an argument
 
 ### No need for `correctGuess` action creator
 
