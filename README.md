@@ -69,7 +69,7 @@
   - `App`
 - Test action creator calls
 
-#### `success` State Planning
+## `success` State Planning
 
 - **Plan** -> test -> code
 - Action creator for `CORRECT_GUESS` action
@@ -139,22 +139,58 @@
 | closer to app                                             | further from app                                                                           |
 | can work with store and see how it is affected by actions | can pass mock action creators as props to check if it is called at the right point in time |
 
-## Action Creator and Reducer
+### Action Creator and Reducer
 
-### Test a simple action creator
+#### Test a simple action creator
 
 - Just a function returning an object!
 
-### Test a simple reducer
+#### Test a simple reducer
 
 - Just a function that returns state!
 
-## Set up Connected Component with Store
+### Set up Connected Component with Store
 
-### Enzyme `ShallowWrapper.dive()`
+#### Enzyme `ShallowWrapper.dive()`
 
 - Get to the child component from connected HOC (`<ContextProvider />`)
 
-### `storeFactory`
+#### `storeFactory`
 
 - Create a store for each test with app settings
+
+## `guessedWords` Planning
+
+### Action creator: `guessWord`
+
+- Function that takes a `guessedWord` string
+- Use helper function to calculate `letterMatchCount`
+- Create action `GUESS_WORD`
+  - Payload contains `guessedWord` and `letterMatchCount`
+- Reducer will update `guessedWords` state
+
+### Complications
+
+- How will iy get secretWord to calculate letter match?
+- What if the word was guessed successfully?
+  - Right place to dispatch `CORRECT_GUESS` to update `success` state
+
+### Redux Thunk!
+
+- Dispatch multiple actions from one creator
+- Access state within action creator
+
+### No need for `correctGuess` action creator
+
+- `CORRECT_GUESS` will be dispatched from `guessWord`
+
+#### Case for argument: skip unit tests on action creators
+
+- Some wasted effort on testing `correctGuess`
+- which was an _implementation detail_
+
+### `guessedWords` Reducer
+
+- control `guessedWords` piece of state
+- Only one action to consider: `GUESS_WORD`
+- Add reset feature: clears `guessedWords`
