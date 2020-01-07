@@ -227,3 +227,10 @@
 - Where to put tests?
   - Make a new file: _src/integration.test.js_
   - Would separate into many files for a larger app
+
+#### Condition Matrix for Testing
+
+|                        | incorrect guess | correct guess |
+| :--------------------: | :-------------: | :-----------: |
+|  **no guessed words**  |      test       |     test      |
+| **some guessed words** |      test       |     test      |
