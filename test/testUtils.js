@@ -1,7 +1,8 @@
 import checkPropTypes from "check-prop-types";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
 import rootReducer from "../src/reducers";
+import { middlewares } from "../src/configureStore";
 
 /* 
 We are testing Input which is wrapped in redux's connect() and exported.
@@ -20,7 +21,10 @@ Invariant Violation: Could not find "store" in the context of "Connect(Input)". 
  * @returns {Store} - Redux store.
  */
 export const storeFactory = initialState => {
-  return createStore(rootReducer, initialState);
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(
+    createStore
+  );
+  return createStoreWithMiddleware(rootReducer, initialState);
 };
 
 /**
