@@ -40,11 +40,17 @@ describe("render", () => {
     });
 
     test("renders component without error", () => {
-      const component = findByTestAttr(wrapper, "component-input");
-      expect(component.length).toBe(1);
+      const components = findByTestAttr(wrapper, "component-input");
+      expect(components.length).toBe(1);
     });
-    test("renders the input control", () => {});
-    test("renders a submit button", () => {});
+    test("renders the input control", () => {
+      const controls = findByTestAttr(wrapper, "input-control");
+      expect(controls.length).toBe(1);
+    });
+    test("renders a submit button", () => {
+      const submitButtons = findByTestAttr(wrapper, "submit-button");
+      expect(submitButtons.length).toBe(1);
+    });
   });
 
   describe("word has been guessed", () => {
