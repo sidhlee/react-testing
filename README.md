@@ -197,3 +197,33 @@
 - control `guessedWords` piece of state
 - Only one action to consider: `GUESS_WORD`
 - Add reset feature: clears `guessedWords`
+
+## Redux Thunk Test Planning
+
+#### What we can do with store?
+
+- `store.dispatch(actionCreator())`
+- `store.getState()`
+  - Returns store object
+  - Useful for assertions
+
+#### Testing a Thunk
+
+1. Create a store with initial state
+
+- Will contain `secretWord`
+
+2. Dispatch action creator
+
+- `store.dispatch(guessWord());`
+
+3. Check state
+
+- Use Jest's `.toEqual()` to test state object as a whole
+
+#### This is Integration Testing
+
+- Testing action creator and reducer together
+- Where to put tests?
+  - Make a new file: _src/integration.test.js_
+  - Would separate into many files for a larger app
