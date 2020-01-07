@@ -138,3 +138,23 @@
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | closer to app                                             | further from app                                                                           |
 | can work with store and see how it is affected by actions | can pass mock action creators as props to check if it is called at the right point in time |
+
+## Action Creator and Reducer
+
+### Test a simple action creator
+
+- Just a function returning an object!
+
+### Test a simple reducer
+
+- Just a function that returns state!
+
+## Set up Connected Component with Store
+
+### Enzyme `ShallowWrapper.dive()`
+
+- Get to the child component from connected HOC (`<ContextProvider />`)
+
+### `storeFactory`
+
+- Create a store for each test with app settings
