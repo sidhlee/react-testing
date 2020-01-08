@@ -244,3 +244,65 @@
 1. Create a store with initial state
 2. Dispatch action creator
 3. Check state
+
+## secretWord Plan
+
+Create `getSecretWord` action creator
+
+- Use axios to get random word from server
+  Shape of Action
+
+```
+{ style: SET_SECRET_WORD, payload: secretWord<string>}
+```
+
+Create `secretWordReducer`
+
+- Sets `secretWord` upon `SET_SECRET_WORD` action type
+  Already set up shell for `guessWord` tests (_./src/integration.test.js_)
+
+### Random Word Server
+
+https://github.com/flyrightsister/udemy-react-testing-projects/tree/master/random-word-server
+
+- Will configure `axios` to send requests to `moxios`
+
+## Moxios.js
+
+Random word server is necessary for actual app but we do not want to test server when testing app.
+
+Using moxios lets us test app
+
+- Without testing server
+- Without even running server
+
+### Working with moxios
+
+1. Test installs moxios
+
+```
+// sets moxios as the axios adapter
+// Pass axios instance to use configured setting
+// Or don't pass anything to use default settings
+moxios.install([axiosInstance])
+```
+
+2. Axios will now send req to moxios instead of http
+3. Test specifies moxios res
+
+```
+// watches for axios calls
+moxios.wait(() => {
+  // Access most recent request
+  const request = moxios.requests.mostRecent();
+  // and to send response:
+  request.respondWith({
+    status: 200,
+    response: secretWord
+  })
+
+})
+```
+
+4. Test calls action creator
+5. Action creator calls axios
