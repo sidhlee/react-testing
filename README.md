@@ -252,7 +252,7 @@ Create `getSecretWord` action creator
 - Use axios to get random word from server
   Shape of Action
 
-```
+```js
 { style: SET_SECRET_WORD, payload: secretWord<string>}
 ```
 
@@ -280,17 +280,17 @@ Using moxios lets us test app
 
 1. Test installs moxios
 
-```
+```js
 // sets moxios as the axios adapter
 // Pass axios instance to use configured setting
 // Or don't pass anything to use default settings
-moxios.install([axiosInstance])
+moxios.install([axiosInstance]);
 ```
 
 2. Axios will now send req to moxios instead of http
 3. Test specifies moxios res
 
-```
+```js
 // watches for axios calls
 moxios.wait(() => {
   // Access most recent request
@@ -299,9 +299,8 @@ moxios.wait(() => {
   request.respondWith({
     status: 200,
     response: secretWord
-  })
-
-})
+  });
+});
 ```
 
 4. Test calls action creator
