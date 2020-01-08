@@ -21,10 +21,11 @@ Invariant Violation: Could not find "store" in the context of "Connect(Input)". 
  * @returns {Store} - Redux store.
  */
 export const storeFactory = initialState => {
-  const createStoreWithMiddleware = applyMiddleware(...middlewares)(
-    createStore
+  return createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(...middlewares)
   );
-  return createStoreWithMiddleware(rootReducer, initialState);
 };
 
 /**
