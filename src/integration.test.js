@@ -1,5 +1,6 @@
 import { storeFactory } from "../test/testUtils";
 import { guessWord } from "../src/actions";
+import { getLetterMatchCount } from "./helpers/index";
 
 describe("guessWord action dispatcher", () => {
   const secretWord = "party";
@@ -8,7 +9,7 @@ describe("guessWord action dispatcher", () => {
     let store;
     const initialState = { secretWord };
     beforeEach(() => {
-      store = storeFactory(initialState);
+      store = storeFactory(initialState); // create store with middleware and preloaded state
     });
     test("updates state correctly for unsuccessful guess", () => {
       store.dispatch(guessWord(unsuccessfulGuessedWord));
@@ -19,7 +20,10 @@ describe("guessWord action dispatcher", () => {
         guessedWords: [
           {
             guessedWord: unsuccessfulGuessedWord,
-            letterMatchCount: 3
+            letterMatchCount: getLetterMatchCount(
+              unsuccessfulGuessedWord,
+              secretWord
+            )
           }
         ]
       };
@@ -63,7 +67,10 @@ describe("guessWord action dispatcher", () => {
           ...guessedWords,
           {
             guessedWord: unsuccessfulGuessedWord,
-            letterMatchCount: 3
+            letterMatchCount: getLetterMatchCount(
+              unsuccessfulGuessedWord,
+              secretWord
+            )
           }
         ]
       };
