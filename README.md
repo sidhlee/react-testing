@@ -253,7 +253,7 @@ Create `getSecretWord` action creator
   Shape of Action
 
 ```js
-{ style: SET_SECRET_WORD, payload: secretWord<string>}
+{ type: SET_SECRET_WORD, payload: secretWord<string>}
 ```
 
 Create `secretWordReducer`
