@@ -308,7 +308,7 @@ moxios.wait(() => {
 
 ## Testing Async Action Creator
 
-1. Create store using `storeFactory(initialState)`;
+1. Create store using `storeFactory([initialState])`;
 2. `store.dispatch(asyncActionCreator())` returns promise
 3. Put tests in `.then()` callback
 4. Tests will run after dispatch completes
@@ -316,6 +316,9 @@ moxios.wait(() => {
 ---
 
 > **Important!**
-> You must see the test fail to ensure that your test function does not exit before running the assertion. If your test function completes without error before promise resolves, the test will pass even though assertion fails after the promise resolves.
+> You must see the test fail to ensure that your test function does not exit before running the assertion. If your test function completes without error before promise resolves, the test will pass even though assertion fails after the promise resolves.  
+> If they don't fail, it's likely that you didn't return `store.dispatch()` promise.
 
 ---
+
+### Async
