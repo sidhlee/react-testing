@@ -360,7 +360,6 @@ Components' Access to Redux
 
 - Needs `secretWord` piece of state to update
   _why? don't we need just getSecretWord?`_
-- Needs `success` and `guessedWords` pieces of state to pass to its children components
-  _why? can't we just connect them to the redux store directly?_
+- Needs `success` and `guessedWords` pieces of state to pass to its children (dumb) components
 - Needs access to `getSecretWord` action creator
   - Will be called in `componentDidMount()` to fetch secret word from the server

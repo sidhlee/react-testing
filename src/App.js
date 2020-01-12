@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Congrats from "./Congrats";
 import GuessedWords from "./GuessedWords";
@@ -23,4 +24,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapState = state => {};
+
+export default connect(mapState)(App);
