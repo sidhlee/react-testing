@@ -359,7 +359,22 @@ Components' Access to Redux
 ### Testing App Component
 
 - Needs `secretWord` piece of state to update
-  _why? don't we need just getSecretWord?`_
+  _- why? don't we need just getSecretWord?`_
 - Needs `success` and `guessedWords` pieces of state to pass to its children (dumb) components
 - Needs access to `getSecretWord` action creator
   - Will be called in `componentDidMount()` to fetch secret word from the server
+
+### Testing Action Creator Calls
+
+Test if `getSecretWord` runs on App mount
+
+- export **unconnected** App component
+  - Best way to mock `getSecretWord`
+- Pass `getSecretWord` via props
+  - Get function from props instead of Redux `connect`
+  - Can mock and check that it runs
+- With mock function, we can assert on:
+  - how many times mock ran during tests
+  - with what arguments
+- To trigger mock function, we simulate `componentDidMount()` in our test
+- Then assert that mock function runs once
