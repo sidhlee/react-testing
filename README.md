@@ -173,7 +173,7 @@
 
 ### Complications
 
-- How will iy get secretWord to calculate letter match?
+- How will we get secretWord to calculate letter match?
 - What if the word was guessed successfully?
   - Right place to dispatch `CORRECT_GUESS` to update `success` state
 
@@ -186,11 +186,9 @@
 ### No need for `correctGuess` action creator
 
 - `CORRECT_GUESS` will be dispatched from `guessWord`
-
-#### Case for argument: skip unit tests on action creators
-
-- Some wasted effort on testing `correctGuess`
-- which was an _implementation detail_
+- Case for argument: skip unit tests on action creators
+  - Some wasted effort on testing `correctGuess`
+  - which was an _implementation detail_
 
 ### `guessedWords` Reducer
 
@@ -250,11 +248,11 @@
 Create `getSecretWord` action creator
 
 - Use axios to get random word from server
-  Shape of Action
+- Shape of Action
 
-```js
-{ type: SET_SECRET_WORD, payload: secretWord<string>}
-```
+  ```js
+  { type: SET_SECRET_WORD, payload: secretWord<string>}
+  ```
 
 Create `secretWordReducer`
 
@@ -267,7 +265,7 @@ https://github.com/flyrightsister/udemy-react-testing-projects/tree/master/rando
 
 - Will configure `axios` to send requests to `moxios`
 
-## Moxios.js
+## 7. Testing Axios
 
 Random word server is necessary for actual app but we do not want to test server when testing app.
 
@@ -321,4 +319,48 @@ moxios.wait(() => {
 
 ---
 
-### Async
+## 8. Redux Components
+
+### Test Component Props from Redux
+
+Do components have access to
+
+- the state they need?
+- the action creator they need?
+
+### Test Action Creator Triggers
+
+- Use mocks to "spy" on action creators
+- Are they called when expected?
+  - `getSecretWord` when `App` mounts
+  - `guessWord` when submit is clicked
+- Are they called with the right arguments?
+  - Input control value for `guessWord`
+
+### Testing Redux Props
+
+#### Components' Access to Redux
+
+- Do components have access to what they need?
+  - Piece of state
+  - Action creators
+- Similar to testing prop types
+- Test fails if component no longer receives state or action creators from its HOC
+
+### Testing Input Component
+
+- Needs `success` piece of state
+  - If true, don't render input control and submit button
+- Needs `guessWord` action creator
+  - Fire when the submit button is clicked
+- Access these in props, like when we are in component code
+  - using `wrapper.instance().props`
+
+### Testing App Component
+
+- Needs `secretWord` piece of state to update
+  _why? don't we need just getSecretWord?`_
+- Needs `success` and `guessedWords` pieces of state to pass to its children components
+  _why? can't we just connect them to the redux store directly?_
+- Needs access to `getSecretWord` action creator
+  - Will be called in `componentDidMount()` to fetch secret word from the server

@@ -24,7 +24,7 @@ const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
   const wrapper = shallow(<Input store={store} />)
     .dive() // get past HOC <ContextProvider />
-    .dive(); // get past wrapping div
+    .dive(); // get past <Input> to the returned JSX element
   return wrapper;
 };
 

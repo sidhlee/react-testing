@@ -1,7 +1,7 @@
 import { actionTypes } from "../actions";
 
 /**
- * @unction secretWordReducer
+ * @function secretWordReducer
  * @param {string} state - State before reducer.
  * @param {object} action - Action sent to reducer.
  * @returns {string} - New state (secret word payload from action).
