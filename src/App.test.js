@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { storeFactory } from "../test/testUtils";
-import App from "./App";
+import App, { UnconnectedApp } from "./App";
 
 const setup = (preloadedState = {}) => {
   const store = storeFactory(preloadedState);

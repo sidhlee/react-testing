@@ -364,7 +364,7 @@ Components' Access to Redux
 - Needs access to `getSecretWord` action creator
   - Will be called in `componentDidMount()` to fetch secret word from the server
 
-### Testing Action Creator Calls
+### Testing Action Dispatcher Calls
 
 Test if `getSecretWord` runs on App mount
 

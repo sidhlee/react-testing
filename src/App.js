@@ -6,7 +6,15 @@ import Input from "./Input";
 import GuessedWords from "./GuessedWords";
 import { getSecretWord } from "./actions";
 
-class App extends Component {
+export class UnconnectedApp extends Component {
+  // without { disableLifecycleMethods: true } option,
+  // this will run every time a test runs shallow() on this component
+  // and make axios call
+  /**
+   * @method componentDidMount
+   * @returns {undefined}
+   */
+  componentDidMount() {}
   render() {
     return (
       <div className="container">
@@ -25,4 +33,4 @@ const mapState = ({ success, secretWord, guessedWords }) => ({
   guessedWords
 });
 
-export default connect(mapState, { getSecretWord })(App);
+export default connect(mapState, { getSecretWord })(UnconnectedApp);
