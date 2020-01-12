@@ -98,6 +98,10 @@ describe("`guessWord` action creator call", () => {
       <UnconnectedInput guessWord={guessWordMock} />
     );
     const submitButton = findByTestAttr(wrapper, "submit-button");
+    const inputControl = findByTestAttr(wrapper, "input-control");
+    inputControl.simulate("change", {
+      target: { name: "value", value: "train" }
+    });
     submitButton.simulate("click");
     const guessWordCallCount = guessWordMock.mock.calls.length;
     expect(guessWordCallCount).toBe(1);
