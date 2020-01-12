@@ -364,9 +364,9 @@ Components' Access to Redux
 - Needs access to `getSecretWord` action creator
   - Will be called in `componentDidMount()` to fetch secret word from the server
 
-### Testing Action Dispatcher Calls
+### Testing Action Creator Calls
 
-Test if `getSecretWord` runs on App mount
+Test if `getSecretWord`(_fetch and dispatch_) runs on App mount
 
 - export **unconnected** App component
   - Best way to mock `getSecretWord`
@@ -378,3 +378,17 @@ Test if `getSecretWord` runs on App mount
   - with what arguments
 - To trigger mock function, we simulate `componentDidMount()` in our test
 - Then assert that mock function runs once
+
+Test `guessWord` call on submit click
+
+- Similar to `getSecretWord` in the App component
+- The tests:
+  1. Action creator runs on submit click
+  2. Action creator runs with correct argument (input control value)
+- Steps for test:
+  - Export unconnected Input component
+  - Mock `guessWord`
+  - Create shallow wrapper of unconnected component
+    - With mock as prop
+  - Simulate click on submit button
+    - Use `findByTestAttr` and Enzyme `simulate()`
