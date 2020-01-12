@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 
 // we don't need checkProp util function here because Input gets all its props from redux store
 import { findByTestAttr, storeFactory } from "../test/testUtils";
-import Input from "./Input";
+import Input, { UnconnectedInput } from "./Input";
 
 /* 
 We are testing Input which is wrapped in redux's connect() and exported.
@@ -88,5 +88,18 @@ describe("redux props", () => {
     const wrapper = setup();
     const guessWordProp = wrapper.instance().props.guessWord;
     expect(guessWordProp).toBeInstanceOf(Function);
+  });
+});
+
+describe("`guessWord` action creator call", () => {
+  test("`guessWord` action creator runs on submit click", () => {
+    const guessWordMock = jest.fn();
+    const wrapper = shallow(
+      <UnconnectedInput guessWord={guessWordMock} />
+    );
+    const submitButton = findByTestAttr(wrapper, "submit-button");
+    submitButton.simulate("click");
+    const guessWordCallCount = guessWordMock.mock.calls.length;
+    expect(guessWordCallCount).toBe(1);
   });
 });
