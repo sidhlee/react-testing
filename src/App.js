@@ -14,7 +14,10 @@ export class UnconnectedApp extends Component {
    * @method componentDidMount
    * @returns {undefined}
    */
-  componentDidMount() {}
+  componentDidMount() {
+    // get the secret word
+    this.props.getSecretWord();
+  }
   render() {
     return (
       <div className="container">
