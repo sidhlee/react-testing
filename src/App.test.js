@@ -38,3 +38,19 @@ describe("Redux props", () => {
     expect(getSecretWordProp).toBeInstanceOf(Function);
   });
 });
+
+test("`getSecretWord` runs on App mount", () => {
+  const getSecretWordMock = jest.fn();
+
+  // set up app component with getSecretWordMock as the get SecretWord prop
+  const wrapper = shallow(
+    <UnconnectedApp getSecretWord={getSecretWordMock} />
+  );
+
+  // run lifecycle method
+  wrapper.instance().componentDidMount();
+
+  // check to see if the mock ran
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+  expect(getSecretWordCallCount).toBe(1);
+});
