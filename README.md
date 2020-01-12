@@ -339,7 +339,7 @@ Do components have access to
 
 ### Testing Redux Props
 
-#### Components' Access to Redux
+Components' Access to Redux
 
 - Do components have access to what they need?
   - Piece of state
