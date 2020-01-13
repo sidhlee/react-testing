@@ -76,7 +76,7 @@ describe("if there are words guessed", () => {
   });
   test("renders correct guess number next to guessed word", () => {
     const guessNumberNodes = findByTestAttr(wrapper, "guess-number");
-    const lastNumber = guessNumberNodes.length;
-    expect(+guessNumberNodes[lastNumber - 1].text()).toBe(lastNumber);
+    const guessNumberLastNode = guessNumberNodes.slice(-1);
+    expect(+guessNumberLastNode.text()).toBe(guessNumberNodes.length);
   });
 });
