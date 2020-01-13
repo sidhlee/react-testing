@@ -92,18 +92,32 @@ describe("redux props", () => {
 });
 
 describe("`guessWord` action creator call", () => {
-  test("`guessWord` action creator runs on submit click", () => {
-    const guessWordMock = jest.fn();
-    const wrapper = shallow(
-      <UnconnectedInput guessWord={guessWordMock} />
-    );
-    const submitButton = findByTestAttr(wrapper, "submit-button");
-    const inputControl = findByTestAttr(wrapper, "input-control");
-    inputControl.simulate("change", {
-      target: { name: "value", value: "train" }
-    });
-    submitButton.simulate("click");
+  let wrapper, guessWordMock;
+  const guessedWord = "train";
+  beforeEach(() => {
+    guessWordMock = jest.fn();
+    // shallow-wrap UnconnectedInput injecting mock action creator
+    wrapper = shallow(<UnconnectedInput guessWord={guessWordMock} />);
+
+    // const inputControl = findByTestAttr(wrapper, "input-control");
+    // inputControl.simulate("change", {
+    //   target: { name: "value", value: "train" }
+    // });
+    wrapper.setState({ value: guessedWord }); // maybe better way because we can care less about the implementation
+    const submitButton = findByTestAttr(wrapper, "input-form");
+    // ShallowWrapper.simulate() takes mock event object as 2nd argument
+    submitButton.simulate("submit", { preventDefault: () => {} });
+  });
+  test("`guessWord` action creator runs on form submit", () => {
     const guessWordCallCount = guessWordMock.mock.calls.length;
     expect(guessWordCallCount).toBe(1);
+  });
+  test("calls `guessWord` with input value as argument", () => {
+    const guessWordArg = guessWordMock.mock.calls[0][0];
+    expect(guessWordArg).toBe(guessedWord);
+  });
+  test("clears input control value upon submit", () => {
+    const value = wrapper.state("value");
+    expect(value).toBe("");
   });
 });

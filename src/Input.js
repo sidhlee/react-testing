@@ -13,9 +13,19 @@ export class UnconnectedInput extends Component {
       value
     });
   };
+  handleSubmit = e => {
+    e.preventDefault();
+    if (!this.state.value) return;
+    this.props.guessWord(this.state.value);
+    this.setState({ value: "" });
+  };
   render() {
     const contents = this.props.success ? null : (
-      <form className="form-inline mb-3">
+      <form
+        className="form-inline mb-3"
+        onSubmit={this.handleSubmit}
+        data-test="input-form"
+      >
         <input
           data-test="input-control"
           className="form-control mr-2"
@@ -28,7 +38,6 @@ export class UnconnectedInput extends Component {
           data-test="submit-button"
           className="btn btn-primary"
           type="submit"
-          onClick={() => this.props.guessWord(this.state.value)}
         >
           Submit
         </button>

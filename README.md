@@ -366,7 +366,7 @@ Components' Access to Redux
 
 ### Testing Action Creator Calls
 
-Test if `getSecretWord`(_fetch and dispatch_) runs on App mount
+#### Test if `getSecretWord`(_fetch and dispatch_) runs on App mount
 
 - export **unconnected** App component
   - Best way to mock `getSecretWord`
@@ -379,7 +379,7 @@ Test if `getSecretWord`(_fetch and dispatch_) runs on App mount
 - To trigger mock function, we simulate `componentDidMount()` in our test
 - Then assert that mock function runs once
 
-Test `guessWord` call on submit click
+#### Test `guessWord` call on submit click
 
 - Similar to `getSecretWord` in the App component
 - The tests:
@@ -392,3 +392,19 @@ Test `guessWord` call on submit click
     - With mock as prop
   - Simulate click on submit button
     - Use `findByTestAttr` and Enzyme `simulate()`
+
+#### Test guessWord argument
+
+- `guessWord(inputControlValue<string>)`
+- Test `state.value` by using Enzyme `setState()` to simulate input control value
+- `ShallowWrapper.simulate(event[, ...args])` takes a mock event object as 2nd argument. We need to provide them if handler method accesses event object.
+
+```js
+beforeEach(() => {
+  guessWordMock = jest.fn();
+  wrapper = shallow(<UnconnectedInput guessWord={guessWordMock} />);
+  wrapper.setState({ value: guessedWord });
+  const submitButton = findByTestAttr(wrapper, "input-form");
+  submitButton.simulate("submit", { preventDefault: () => {} });
+});
+```
