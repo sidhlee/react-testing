@@ -18,12 +18,12 @@ const fileContent = fs.readFileSync(
 );
 const words = JSON.parse(fileContent);
 const { fiveLetterWords } = words;
-const randomIndex = Math.floor(
-  Math.random() * fiveLetterWords.length
-);
-const fiveLetterWord = fiveLetterWords[randomIndex];
 
 app.get("/", (req, res) => {
+  const randomIndex = Math.floor(
+    Math.random() * fiveLetterWords.length
+  );
+  const fiveLetterWord = fiveLetterWords[randomIndex];
   res.send(fiveLetterWord);
 });
 
