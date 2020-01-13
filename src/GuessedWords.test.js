@@ -70,4 +70,13 @@ describe("if there are words guessed", () => {
     const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
     expect(guessedWordNodes.length).toBe(guessedWords.length);
   });
+  test("renders `guess number` column", () => {
+    const guessNumberNodes = findByTestAttr(wrapper, "guess-number");
+    expect(guessNumberNodes.length).toBeGreaterThanOrEqual(1);
+  });
+  test("renders correct guess number next to guessed word", () => {
+    const guessNumberNodes = findByTestAttr(wrapper, "guess-number");
+    const lastNumber = guessNumberNodes.length;
+    expect(+guessNumberNodes[lastNumber - 1].text()).toBe(lastNumber);
+  });
 });
