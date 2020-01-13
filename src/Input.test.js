@@ -103,6 +103,8 @@ describe("`guessWord` action creator call", () => {
     // inputControl.simulate("change", {
     //   target: { name: "value", value: "train" }
     // });
+
+    // set local state
     wrapper.setState({ value: guessedWord }); // maybe better way because we can care less about the implementation
     const submitButton = findByTestAttr(wrapper, "input-form");
     // ShallowWrapper.simulate() takes mock event object as 2nd argument

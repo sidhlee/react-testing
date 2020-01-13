@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class UnconnectedNewWordButton extends Component {
+export class UnconnectedNewWordButton extends Component {
   render() {
-    return <di></di>;
+    const newWordButton = this.props.success ? (
+      <button
+        data-test="new-word-button"
+        className="btn btn-success mb-3"
+      >
+        New Word
+      </button>
+    ) : null;
+    return <>{newWordButton}</>;
   }
 }
 
