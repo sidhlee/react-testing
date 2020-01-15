@@ -61,15 +61,30 @@ describe("`getNewWord` action creator call", () => {
   });
   describe("redux store", () => {
     let wrapper;
+    beforeEach(() => {
+      const preloadedState = {
+        success: true,
+        guessedWords: [
+          { guessedWord: "fetch", letterMatchCount: 3 },
+          { guessedWord: "ditch", letterMatchCount: 3 },
+          { guessedWord: "bed", letterMatchCount: 3 }
+        ],
+        secretWord: "banff"
+      };
+      const store = storeFactory(preloadedState);
+      wrapper = shallow(<App store={store} />)
+        .dive()
+        .dive();
+    });
+
     test("clears guessed words list", () => {
-      const wrapper = setup();
       const guessedWords = wrapper.instance().props.guessedWords;
       expect(guessedWords.length).toBe(0);
     });
     test("gets new secret word", () => {
-      const wrapper = setup();
       const secretWord = wrapper.instance().props.secretWord;
-      expect(secretWord);
+      expect(secretWord.length).toBe(5);
+      expect(secretWord).not.toBe("banff");
     });
   });
 });
