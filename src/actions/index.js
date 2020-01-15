@@ -5,7 +5,8 @@ import { getLetterMatchCount } from "../helpers/";
 export const actionTypes = {
   CORRECT_GUESS: "CORRECT_GUESS",
   GUESS_WORD: "GUESS_WORD",
-  SET_SECRET_WORD: "SET_SECRET_WORD"
+  SET_SECRET_WORD: "SET_SECRET_WORD",
+  CLEAR_GUESSED_WORDS: "CLEAR_GUESSED_WORDS"
 };
 
 /**
@@ -43,5 +44,16 @@ export const getSecretWord = () => {
         payload: res.data
       });
     });
+  };
+};
+
+export const clearGuessedWords = () => ({
+  type: actionTypes.CLEAR_GUESSED_WORDS
+});
+
+export const getNewWord = () => {
+  return dispatch => {
+    dispatch(clearGuessedWords()); // sync action creator
+    return dispatch(getSecretWord()); // async action creator
   };
 };

@@ -4,7 +4,8 @@ import { findByTestAttr, storeFactory } from "../test/testUtils";
 import NewWordButton, {
   UnconnectedNewWordButton
 } from "./NewWordButton";
-import App from "./App";
+import { getNewWord } from "./actions";
+import moxios from "moxios";
 /**
  * Factory function to create ShallowWrapper for NewWordButton component.
  * @function setup
@@ -47,6 +48,7 @@ describe("word has been successfully guessed", () => {
 
 describe("`getNewWord` action creator call", () => {
   let getNewWordMock, wrapper;
+
   beforeEach(() => {
     getNewWordMock = jest.fn();
     wrapper = shallow(
@@ -59,32 +61,51 @@ describe("`getNewWord` action creator call", () => {
     const getNewWordCallCount = getNewWordMock.mock.calls.length;
     expect(getNewWordCallCount).toBe(1);
   });
-  describe("redux store", () => {
-    let wrapper;
-    beforeEach(() => {
-      const preloadedState = {
-        success: true,
-        guessedWords: [
-          { guessedWord: "fetch", letterMatchCount: 3 },
-          { guessedWord: "ditch", letterMatchCount: 3 },
-          { guessedWord: "bed", letterMatchCount: 3 }
-        ],
-        secretWord: "banff"
-      };
-      const store = storeFactory(preloadedState);
-      wrapper = shallow(<App store={store} />)
-        .dive()
-        .dive();
-    });
 
+  describe("`getNewWord` properly updates redux store", () => {
+    let store;
+    const oldSecretWord = "banff";
+    const newSecretWord = "gaudy";
+    const preloadedState = {
+      success: true,
+      guessedWords: [
+        { guessedWord: "fetch", letterMatchCount: 3 },
+        { guessedWord: "ditch", letterMatchCount: 3 },
+        { guessedWord: "bed", letterMatchCount: 3 }
+      ],
+      secretWord: oldSecretWord
+    };
+    beforeEach(() => {
+      // If the action creator that you're testing involves axios call
+      // use moxios to intercept network request and respond with mock data
+      moxios.install();
+      store = storeFactory(preloadedState);
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: newSecretWord
+        });
+      });
+    });
+    afterEach(() => {
+      moxios.uninstall();
+    });
     test("clears guessed words list", () => {
-      const guessedWords = wrapper.instance().props.guessedWords;
-      expect(guessedWords.length).toBe(0);
+      // When testing thunk with axios call
+      // you MUST RETURN the store.dispatch(thunk) inside test callback
+      // and put expect inside .then()
+      return store.dispatch(getNewWord()).then(() => {
+        const guessedWords = store.getState().guessedWords;
+        expect(guessedWords.length).toBe(0);
+      });
     });
     test("gets new secret word", () => {
-      const secretWord = wrapper.instance().props.secretWord;
-      expect(secretWord.length).toBe(5);
-      expect(secretWord).not.toBe("banff");
+      return store.dispatch(getNewWord()).then(() => {
+        const secretWord = store.getState().secretWord;
+        expect(secretWord.length).toBe(5);
+        expect(secretWord).not.toBe("banff");
+      });
     });
   });
 });
