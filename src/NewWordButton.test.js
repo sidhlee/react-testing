@@ -50,7 +50,7 @@ describe("`getNewWord` action creator call", () => {
   beforeEach(() => {
     getNewWordMock = jest.fn();
     wrapper = shallow(
-      <UnconnectedNewWordButton getNewWord={getNewWordMock} />
+      <UnconnectedNewWordButton getNewWord={getNewWordMock} success />
     );
     const newWordButton = findByTestAttr(wrapper, "new-word-button");
     newWordButton.simulate("click");
