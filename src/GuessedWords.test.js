@@ -70,13 +70,16 @@ describe("if there are words guessed", () => {
     const guessedWordNodes = findByTestAttr(wrapper, "guessed-word");
     expect(guessedWordNodes.length).toBe(guessedWords.length);
   });
-  test("renders `guess number` column", () => {
-    const guessNumberNodes = findByTestAttr(wrapper, "guess-number");
-    expect(guessNumberNodes.length).toBeGreaterThanOrEqual(1);
+  test("renders `guess index` column", () => {
+    const guessWordIndexes = findByTestAttr(wrapper, "guess-index");
+    expect(guessWordIndexes.length).toBeGreaterThanOrEqual(1);
   });
-  test("renders correct guess number next to guessed word", () => {
-    const guessNumberNodes = findByTestAttr(wrapper, "guess-number");
-    const guessNumberLastNode = guessNumberNodes.slice(-1);
-    expect(+guessNumberLastNode.text()).toBe(guessNumberNodes.length);
+  test("renders correct index next to guessed word", () => {
+    const guessIndex = findByTestAttr(wrapper, "guess-index");
+    const indexes = guessIndex.map(wrapper => wrapper.text());
+    const expected = guessedWords.map((word, index) =>
+      (index + 1).toString()
+    );
+    expect(indexes).toEqual(expected);
   });
 });
