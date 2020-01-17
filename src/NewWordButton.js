@@ -5,7 +5,7 @@ const NewWordButton = props => {
   return props.display ? (
     <button
       data-test="component-new-word-button"
-      className="btn btn-success m-3"
+      className="btn btn-success mb-3"
       onClick={props.resetAction}
     >
       New word

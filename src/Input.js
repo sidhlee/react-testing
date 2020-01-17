@@ -28,7 +28,7 @@ export class UnconnectedInput extends Component {
       >
         <input
           data-test="input-control"
-          className="form-control mr-2"
+          className="form-control mr-2 mt-2 mb-2"
           type="text"
           placeholder="enter guess"
           onChange={this.handleChange}
