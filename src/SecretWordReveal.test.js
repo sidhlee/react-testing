@@ -24,7 +24,7 @@ test("renders without error", () => {
     wrapper,
     "component-secret-word-reveal"
   );
-  expect(component.length).toBE(1);
+  expect(component.length).toBe(1);
 });
 test("renders no text when 'display' prop is false", () => {
   const wrapper = setup({ display: false });
