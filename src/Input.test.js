@@ -53,6 +53,8 @@ describe("render", () => {
     });
   });
 
+  test("renders 'give up' button", () => {});
+
   describe("word has been guessed", () => {
     // expect to see nothing in this case
     let wrapper;
