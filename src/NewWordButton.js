@@ -2,19 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const NewWordButton = props => {
-  const newWordButton = props.success ? (
+  return props.display ? (
     <button
-      data-test="new-word-button"
-      className="btn btn-success mb-3"
-      onClick={props.getNewWord}
+      data-test="component-new-word-button"
+      className="btn btn-success m-3"
+      onClick={props.resetAction}
     >
-      New Word
+      New word
     </button>
-  ) : null;
-
-  return <>{newWordButton}</>;
+  ) : (
+    <div data-test="component-new-word-button" />
+  );
 };
 
-NewWordButton.propTypes = {};
+NewWordButton.propTypes = {
+  display: PropTypes.bool.isRequired,
+  resetAction: PropTypes.func
+};
 
 export default NewWordButton;
