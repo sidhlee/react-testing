@@ -1,5 +1,5 @@
 import { actionTypes } from "../actions";
-import guessedWordsReducer from "./gueesedWordsReducer";
+import guessedWordsReducer from "./guessedWordsReducer";
 
 // Note: Adding guessed words is tested via integration tests in Input.test.js
 

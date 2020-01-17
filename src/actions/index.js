@@ -6,7 +6,8 @@ export const actionTypes = {
   CORRECT_GUESS: "CORRECT_GUESS",
   GUESS_WORD: "GUESS_WORD",
   SET_SECRET_WORD: "SET_SECRET_WORD",
-  RESET_GAME: "RESET_GAME"
+  RESET_GAME: "RESET_GAME",
+  GIVE_UP: "GIVE_UP"
 };
 
 /**
@@ -73,4 +74,8 @@ export const resetGame = () => {
     dispatch({ type: actionTypes.RESET_GAME });
     return getSecretWordDispatch(dispatch);
   };
+};
+
+export const giveUp = () => {
+  return { type: actionTypes.GIVE_UP };
 };
