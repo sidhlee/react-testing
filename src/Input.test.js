@@ -51,9 +51,12 @@ describe("render", () => {
       const submitButtons = findByTestAttr(wrapper, "submit-button");
       expect(submitButtons.length).toBe(1);
     });
-  });
 
-  test("renders 'give up' button", () => {});
+    test("renders 'give up' button", () => {
+      const giveUpButton = findByTestAttr(wrapper, "give-up-button");
+      expect(giveUpButton.length).toBe(1);
+    });
+  });
 
   describe("word has been guessed", () => {
     // expect to see nothing in this case

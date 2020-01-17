@@ -41,6 +41,12 @@ export class UnconnectedInput extends Component {
         >
           Submit
         </button>
+        <button
+          data-test="give-up-button"
+          className="btn btn-danger ml-2"
+        >
+          Give up
+        </button>
       </form>
     );
     return <div data-test="component-input">{contents}</div>;
