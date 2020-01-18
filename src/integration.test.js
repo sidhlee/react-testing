@@ -5,6 +5,7 @@ import { getLetterMatchCount } from "./helpers/index";
 describe("guessWord action dispatcher", () => {
   const secretWord = "party";
   const unsuccessfulGuessedWord = "train";
+  const moreState = { gaveUp: false };
   describe("no guessed words", () => {
     let store;
     const initialState = { secretWord };
@@ -16,6 +17,7 @@ describe("guessWord action dispatcher", () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        ...moreState,
         success: false,
         guessedWords: [
           {
@@ -34,6 +36,7 @@ describe("guessWord action dispatcher", () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        ...moreState,
         success: true,
         guessedWords: [
           {
@@ -62,6 +65,7 @@ describe("guessWord action dispatcher", () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        ...moreState,
         success: false,
         guessedWords: [
           ...guessedWords,
@@ -81,6 +85,7 @@ describe("guessWord action dispatcher", () => {
       const newState = store.getState();
       const expectedState = {
         ...initialState,
+        ...moreState,
         success: true,
         guessedWords: [
           ...guessedWords,
