@@ -12,30 +12,42 @@ const setup = (preloadedState = {}) => {
 };
 
 describe("Redux props", () => {
+  let wrapper;
+  const success = true;
+  const secretWord = "party";
+  const guessedWords = [
+    { guessedWord: "train", letterMatchCount: 3 }
+  ];
+  const gaveUp = false;
+
+  beforeEach(() => {
+    wrapper = setup({
+      success,
+      secretWord,
+      guessedWords,
+      gaveUp
+    });
+  });
+
   test("has access to `success` state", () => {
-    const success = true;
-    const wrapper = setup({ success });
     const successProp = wrapper.instance().props.success;
     expect(successProp).toBe(success);
   });
   test("has access to `secretWord` state", () => {
-    const secretWord = "party";
-    const wrapper = setup({ secretWord });
     const secretWordProp = wrapper.instance().props.secretWord;
     expect(secretWordProp).toBe(secretWord);
   });
   test("has access to `guessedWords` state", () => {
-    const guessedWords = [
-      { guessedWord: "train", letterMatchCount: 3 }
-    ];
-    const wrapper = setup({ guessedWords });
     const guessedWordsProp = wrapper.instance().props.guessedWords;
     expect(guessedWordsProp).toEqual(guessedWords);
   });
   test("`getSecretWord` action creator is a function on the props", () => {
-    const wrapper = setup();
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
     expect(getSecretWordProp).toBeInstanceOf(Function);
+  });
+  test("'resetGame' action creator is a function on the props", () => {
+    const resetGameProp = wrapper.instance().props.resetGame;
+    expect(resetGameProp).toBeInstanceOf(Function);
   });
 });
 
@@ -45,7 +57,8 @@ test("`getSecretWord` runs on App mount", () => {
   const props = {
     getSecretWord: getSecretWordMock,
     success: false, // required by prop-type
-    guessedWords: [] // required by prop-type
+    guessedWords: [], // required by prop-type,
+    gaveUp: false // required by prop-type
   };
 
   // set up app component with getSecretWordMock as the get SecretWord prop

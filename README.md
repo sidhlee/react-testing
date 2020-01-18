@@ -336,6 +336,36 @@ Do components have access to
   - `guessWord` when submit is clicked
 - Are they called with the right arguments?
   - Input control value for `guessWord`
+- You are shallow wrapping "unconnected" component in order to pass jest's spy function instead of the original action creator that is injected with
+
+```js
+connect(mapState, {...actionCreators})(unconnectedComponent`)
+```
+
+- Make sure to pass required props to the wrapping component which is unconnected from the redux store and therefore not getting pieces of state as props. Otherwise, prop-types will log warnings about missing props that are specified to be required.
+
+```js
+test("`getSecretWord` runs on App mount", () => {
+  const getSecretWordMock = jest.fn();
+
+  const props = {
+    getSecretWord: getSecretWordMock,
+    success: false, // required by prop-type
+    guessedWords: [], // required by prop-type,
+    gaveUp: false // required by prop-type
+  };
+
+  // set up app component with getSecretWordMock as the get SecretWord prop
+  const wrapper = shallow(<UnconnectedApp {...props} />);
+
+  // run life-cycle method
+  wrapper.instance().componentDidMount();
+
+  // check to see if the mock ran
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+  expect(getSecretWordCallCount).toBe(1);
+});
+```
 
 ### Testing Redux Props
 
