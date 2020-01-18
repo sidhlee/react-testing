@@ -33,6 +33,10 @@ describe("Redux props", () => {
     const successProp = wrapper.instance().props.success;
     expect(successProp).toBe(success);
   });
+  test("has access to 'gaveUp' state", () => {
+    const gaveUpProp = wrapper.instance().props.gaveUp;
+    expect(gaveUpProp).toBe(gaveUp);
+  });
   test("has access to `secretWord` state", () => {
     const secretWordProp = wrapper.instance().props.secretWord;
     expect(secretWordProp).toBe(secretWord);
