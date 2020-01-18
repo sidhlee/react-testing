@@ -68,7 +68,9 @@ describe("submit click action", () => {
     wrapper.instance().inputControl.current = {
       value: userSecretWord
     }; // set <input>'s value to "dodge"
-    const form = findByTestAttr(wrapper, "component-enter-word-form");
+    const form = wrapper.find(
+      "[data-test='component-enter-word-form'] form"
+    );
     form.simulate("submit", { preventDefault: () => {} });
   });
   test("'setUserSecretWord' was called once", () => {
