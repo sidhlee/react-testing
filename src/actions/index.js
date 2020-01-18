@@ -78,6 +78,36 @@ export const resetGame = () => {
   };
 };
 
+/**
+ * Simple action creator that returns GIVE_UP action type
+ * @function giveUp
+ * @returns {object} - GIVE_UP action type
+ */
 export const giveUp = () => {
   return { type: actionTypes.GIVE_UP };
 };
+
+/**
+ * Action creator to dispatch USER_ENTERED and SET_SECRET_WORD actions.
+ * @function setUserSecretWord
+ * @param {string} userSecretWord - Secret word entered by user.
+ * @returns {function} - Redux thunks function.
+ */
+export const setUserSecretWord = userSecretWord => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.SET_SECRET_WORD,
+      payload: userSecretWord
+    });
+    dispatch({ type: actionTypes.USER_ENTERED });
+  };
+};
+
+/**
+ * Action creator that returns USER_ENTERING action type.
+ * @function setUserEntering
+ * @returns {object} - Action with type USER_ENTERING.
+ */
+export const setUserEntering = () => ({
+  type: actionTypes.USER_ENTERING
+});

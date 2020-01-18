@@ -52,9 +52,9 @@ describe("render", () => {
   });
 });
 
-// setUserSecretWord is a action creator passed from App
-// as a prop named 'formAction'
 describe("submit click action", () => {
+  // setUserSecretWord is a action creator passed from App
+  // as a prop named 'formAction'
   let setUserSecretWordMock, wrapper;
   const userSecretWord = "dodge";
   beforeEach(() => {
