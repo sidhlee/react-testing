@@ -10,7 +10,7 @@ If the new state updated by the reducer matches expected state, the test passes.
 describe("guessWord action dispatcher", () => {
   const secretWord = "party";
   const unsuccessfulGuessedWord = "train";
-  const moreState = { gaveUp: false };
+  const moreState = { gaveUp: false, userEnter: null };
   describe("no guessed words", () => {
     let store;
     const initialState = { secretWord };
@@ -103,4 +103,12 @@ describe("guessWord action dispatcher", () => {
       expect(newState).toEqual(expectedState);
     });
   });
+});
+
+describe("setUserSecretWord action dispatcher", () => {
+  // this is in the integration test because it involves
+  // the setUserSecretWord action creator and tow reducers:
+  // (userEnterReducer and secretWordReducer)
+  test("updates 'secretWord' state correctly after user secret word entered", () => {});
+  test("updates 'userEnter' state correctly after user secret word is submitted", () => {});
 });
