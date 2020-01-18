@@ -96,6 +96,15 @@ describe("redux props", () => {
   });
 });
 
+test("calls 'giveUp' prop upon 'Give Up' button click", () => {
+  const giveUpMock = jest.fn(); // create a mock function to spy on
+  const wrapper = shallow(<UnconnectedInput giveUp={giveUpMock} />);
+  const giveUpButton = findByTestAttr(wrapper, "give-up-button");
+  // 2nd arg: event object to pass into event handler
+  giveUpButton.simulate("click", { preventDefault: () => {} });
+  expect(giveUpMock.mock.calls.length).toBe(1);
+});
+
 describe("`guessWord` action creator call", () => {
   let wrapper, guessWordMock;
   const guessedWord = "train";
