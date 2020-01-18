@@ -60,7 +60,7 @@ test("calls 'buttonAction' prop upon button click", () => {
     wrapper,
     "component-enter-word-button"
   );
-  // In this case, wrapper and resetButton are the same element
+  // wrapper and resetButton are the same element when display: true
   console.log("wrapper: ", wrapper.debug()); // rendered element
   console.log("resetButton: ", resetButton.debug()); // queried element inside rendered element
   resetButton.simulate("click");
