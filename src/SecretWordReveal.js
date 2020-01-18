@@ -3,9 +3,14 @@ import PropTypes from "prop-types";
 
 const SecretWordReveal = props => {
   const message = (
-    <div data-test="reveal-message" className="alert alert-info">
-      <p>The secret word is{props.secretWord}</p>
-      <p>You will get it next time!</p>
+    <div
+      data-test="reveal-message"
+      className="alert alert-info pt-3 pb-0"
+    >
+      <p>
+        The secret word is <strong>{props.secretWord}.</strong>
+      </p>
+      <p>Let's try again!</p>
     </div>
   );
   return (

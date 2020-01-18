@@ -11,7 +11,7 @@ const Congrats = props => {
   const message = props.success ? (
     <div
       data-test="congrats-message"
-      className="alert alert-success mb-4"
+      className="alert alert-success mt-4 mb-4"
     >
       Congratulations! You guessed the word!
     </div>

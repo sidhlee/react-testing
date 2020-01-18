@@ -7,6 +7,7 @@ import GuessedWords from "./GuessedWords";
 import TotalGuesses from "./TotalGuesses";
 import { getSecretWord, resetGame } from "./actions";
 import NewWordButton from "./NewWordButton";
+import SecretWordReveal from "./SecretWordReveal";
 
 export class UnconnectedApp extends Component {
   // without { disableLifecycleMethods: true } option,
@@ -23,12 +24,16 @@ export class UnconnectedApp extends Component {
   render() {
     const totalGuesses = this.props.guessedWords.length;
     return (
-      <div className="container">
+      <div className="container text-center">
         <h1>Jotto</h1>
         <div>The secret word is {this.props.secretWord}</div>
         <Congrats success={this.props.success} />
+        <SecretWordReveal
+          display={this.props.gaveUp}
+          secretWord={this.props.secretWord}
+        />
         <NewWordButton
-          display={this.props.success}
+          display={this.props.success || this.props.gaveUp}
           resetAction={this.props.resetGame}
         />
         <Input />
@@ -39,10 +44,11 @@ export class UnconnectedApp extends Component {
   }
 }
 
-const mapState = ({ success, secretWord, guessedWords }) => ({
+const mapState = ({ success, secretWord, guessedWords, gaveUp }) => ({
   success,
   secretWord,
-  guessedWords
+  guessedWords,
+  gaveUp
 });
 
 const actions = { getSecretWord, resetGame };

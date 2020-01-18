@@ -27,7 +27,7 @@ export class UnconnectedInput extends Component {
     const contents =
       this.props.success || this.props.gaveUp ? null : (
         <form
-          className="form-inline mb-3"
+          className="form-inline mb-3 d-flex justify-content-center"
           onSubmit={this.handleSubmit}
           data-test="input-form"
         >
