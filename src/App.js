@@ -5,9 +5,16 @@ import Congrats from "./Congrats";
 import Input from "./Input";
 import GuessedWords from "./GuessedWords";
 import TotalGuesses from "./TotalGuesses";
-import { getSecretWord, resetGame } from "./actions";
+import {
+  getSecretWord,
+  resetGame,
+  setUserEntering,
+  setUserSecretWord
+} from "./actions";
 import NewWordButton from "./NewWordButton";
 import SecretWordReveal from "./SecretWordReveal";
+import EnterWordForm from "./EnterWordForm";
+import EnterWordButton from "./EnterWordButton";
 
 export class UnconnectedApp extends Component {
   // without { disableLifecycleMethods: true } option,
@@ -23,33 +30,64 @@ export class UnconnectedApp extends Component {
   }
   render() {
     const totalGuesses = this.props.guessedWords.length;
+    const content =
+      this.props.userEnter === "inProgress" ? (
+        <EnterWordForm
+          data-test="component-enter-word-form"
+          formAction={this.props.setUserSecretWord}
+        />
+      ) : (
+        <>
+          <div>The secret word is {this.props.secretWord}</div>
+          <Congrats success={this.props.success} />
+          <SecretWordReveal
+            display={this.props.gaveUp}
+            secretWord={this.props.secretWord}
+          />
+          <NewWordButton
+            display={this.props.success || this.props.gaveUp}
+            resetAction={this.props.resetGame}
+          />
+          <Input />
+          <GuessedWords guessedWords={this.props.guessedWords} />
+          <TotalGuesses totalGuesses={totalGuesses} />
+          <EnterWordButton
+            display={
+              this.props.guessedWords.length === 0 ||
+              this.props.success ||
+              this.props.gaveUp
+            }
+            buttonAction={this.props.setUserEntering}
+          />
+        </>
+      );
     return (
       <div className="container text-center">
         <h1>Jotto</h1>
-        <div>The secret word is {this.props.secretWord}</div>
-        <Congrats success={this.props.success} />
-        <SecretWordReveal
-          display={this.props.gaveUp}
-          secretWord={this.props.secretWord}
-        />
-        <NewWordButton
-          display={this.props.success || this.props.gaveUp}
-          resetAction={this.props.resetGame}
-        />
-        <Input />
-        <GuessedWords guessedWords={this.props.guessedWords} />
-        <TotalGuesses totalGuesses={totalGuesses} />
+        {content}
       </div>
     );
   }
 }
 
-const mapState = ({ success, secretWord, guessedWords, gaveUp }) => ({
+const mapState = ({
   success,
   secretWord,
   guessedWords,
-  gaveUp
+  gaveUp,
+  userEnter
+}) => ({
+  success,
+  secretWord,
+  guessedWords,
+  gaveUp,
+  userEnter
 });
 
-const actions = { getSecretWord, resetGame };
+const actions = {
+  getSecretWord,
+  resetGame,
+  setUserEntering,
+  setUserSecretWord
+};
 export default connect(mapState, actions)(UnconnectedApp);

@@ -61,8 +61,8 @@ test("calls 'buttonAction' prop upon button click", () => {
     "component-enter-word-button"
   );
   // wrapper and resetButton are the same element when display: true
-  console.log("wrapper: ", wrapper.debug()); // rendered element
-  console.log("resetButton: ", resetButton.debug()); // queried element inside rendered element
+  // console.log("wrapper: ", wrapper.debug()); // rendered element
+  // console.log("resetButton: ", resetButton.debug()); // queried element inside rendered element
   resetButton.simulate("click");
   expect(buttonActionMock.mock.calls.length).toBe(1);
 });

@@ -26,6 +26,8 @@ export default (state = false, action) => {
       return true;
     case actionTypes.RESET_GAME:
       return false;
+    case actionTypes.USER_ENTERED:
+      return false;
     default:
       return state;
   }

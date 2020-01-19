@@ -1,5 +1,5 @@
 import { storeFactory } from "../test/testUtils";
-import { guessWord } from "../src/actions";
+import { guessWord, setUserSecretWord } from "../src/actions";
 import { getLetterMatchCount } from "./helpers/index";
 
 /* 
@@ -107,8 +107,23 @@ describe("guessWord action dispatcher", () => {
 
 describe("setUserSecretWord action dispatcher", () => {
   // this is in the integration test because it involves
-  // the setUserSecretWord action creator and tow reducers:
+  // the setUserSecretWord action creator and two reducers:
   // (userEnterReducer and secretWordReducer)
-  test("updates 'secretWord' state correctly after user secret word entered", () => {});
-  test("updates 'userEnter' state correctly after user secret word is submitted", () => {});
+  let store, newState;
+  const preloadedState = {
+    secretWord: "party"
+  };
+  const userSecretWord = "dodge";
+  beforeEach(() => {
+    store = storeFactory(preloadedState);
+    store.dispatch(setUserSecretWord(userSecretWord));
+    newState = store.getState();
+  });
+  test("updates 'secretWord' state correctly after user secret word entered", () => {
+    // only testing one piece of state
+    expect(newState.secretWord).toBe(userSecretWord);
+  });
+  test("updates 'userEnter' state correctly after user secret word is submitted", () => {
+    expect(newState.userEnter).toBe("done");
+  });
 });

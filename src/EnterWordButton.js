@@ -7,7 +7,7 @@ const EnterWordButton = props => {
       <button
         data-test="component-enter-word-button"
         type="button"
-        className="btn btn-primary mb-3"
+        className="btn btn-outline-success mt-5 mb-3"
         onClick={props.buttonAction}
       >
         Enter your own secret word

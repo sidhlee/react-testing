@@ -18,7 +18,7 @@ describe("Redux props", () => {
   const guessedWords = [
     { guessedWord: "train", letterMatchCount: 3 }
   ];
-  const gaveUp = "don't give up!!";
+  const gaveUp = true;
   const userEnter = null;
 
   beforeEach(() => {

@@ -12,6 +12,8 @@ export default (state = [], action) => {
       return [...state, action.payload];
     case actionTypes.RESET_GAME:
       return [];
+    case actionTypes.USER_ENTERED:
+      return [];
     default:
       return state;
   }

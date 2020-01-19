@@ -22,17 +22,26 @@ export class EnterWordForm extends React.Component {
         <p data-test="enter-word-instructions">
           Enter a secret word for other players to guess!
         </p>
-        <form className="form-inline" onSubmit={this.handleSubmit}>
+        <form
+          className="input-group w-sm-75 mx-auto"
+          onSubmit={this.handleSubmit}
+        >
           <input
             data-test="input-control"
             ref={this.inputControl}
-            className="input-control"
+            className="form-control"
             type="text"
             placeholder="enter 5-letter secret word"
           />
-          <button data-test="submit-button" type="submit">
-            Submit
-          </button>
+          <div className="input-group-append">
+            <button
+              data-test="submit-button"
+              type="submit"
+              className="btn btn-success"
+            >
+              Go
+            </button>
+          </div>
         </form>
       </div>
     );
