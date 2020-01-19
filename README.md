@@ -438,3 +438,5 @@ beforeEach(() => {
   submitButton.simulate("submit", { preventDefault: () => {} });
 });
 ```
+
+## New feature: user secret word
