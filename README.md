@@ -440,3 +440,8 @@ beforeEach(() => {
 ```
 
 ## New feature: user secret word
+
+## New feature: server error
+
+- Install `moxios` to intercept axios call and respond with 4xx and 5xx status.
+- Test if that updates serverError state correctly and render ServerError component in `<App />`.
