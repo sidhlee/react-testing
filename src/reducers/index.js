@@ -4,11 +4,13 @@ import guessedWords from "./guessedWordsReducer";
 import secretWord from "./secretWordReducer";
 import gaveUp from "./gaveUpReducer";
 import userEnter from "./userEnterReducer";
+import serverError from "./serverErrorReducer";
 
 export default combineReducers({
   success,
   guessedWords,
   secretWord,
   gaveUp,
-  userEnter
+  userEnter,
+  serverError
 });

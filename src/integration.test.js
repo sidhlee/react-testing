@@ -10,7 +10,11 @@ If the new state updated by the reducer matches expected state, the test passes.
 describe("guessWord action dispatcher", () => {
   const secretWord = "party";
   const unsuccessfulGuessedWord = "train";
-  const moreState = { gaveUp: false, userEnter: null };
+  const moreState = {
+    gaveUp: false,
+    userEnter: null,
+    serverError: false
+  };
   describe("no guessed words", () => {
     let store;
     const initialState = { secretWord };
