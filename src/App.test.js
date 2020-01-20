@@ -122,4 +122,22 @@ describe("render", () => {
     const form = findByTestAttr(wrapper, "component-enter-word-form");
     expect(form.length).toBe(0);
   });
+  describe("ServerError", () => {
+    test("renders component when serverError state is true", () => {
+      const wrapper = setup({ serverError: true });
+      const component = findByTestAttr(
+        wrapper,
+        "component-server-error"
+      );
+      expect(component.length).toBe(1);
+    });
+    test("does not render component when serverError state is false", () => {
+      const wrapper = setup({ serverError: false });
+      const component = findByTestAttr(
+        wrapper,
+        "component-server-error"
+      );
+      expect(component.length).toBe(0);
+    });
+  });
 });

@@ -33,7 +33,7 @@ export class UnconnectedApp extends Component {
     const totalGuesses = this.props.guessedWords.length;
     let content;
     if (this.props.serverError) {
-      content = <ServerError />;
+      content = <ServerError data-test="component-server-error" />;
     } else {
       content =
         this.props.userEnter === "inProgress" ? (
