@@ -48,12 +48,20 @@ export const guessWord = guessedWord => {
  * @returns {Promise}
  */
 export const getSecretWordDispatch = dispatch => {
-  return axios.get("http://localhost:3030").then(res => {
-    dispatch({
-      type: actionTypes.SET_SECRET_WORD,
-      payload: res.data
+  return axios
+    .get("http://localhost:3030")
+    .then(res => {
+      dispatch({
+        type: actionTypes.SET_SECRET_WORD,
+        payload: res.data
+      });
+    })
+    .catch(e => {
+      dispatch({
+        type: actionTypes.SERVER_ERROR
+      });
+      console.log(e);
     });
-  });
 };
 
 /**

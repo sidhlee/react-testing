@@ -46,7 +46,7 @@ describe("getSecretWord action creator", () => {
       });
     });
     test("when server returns 5xx status", () => {
-      const store = storeFactory;
+      const store = storeFactory();
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
